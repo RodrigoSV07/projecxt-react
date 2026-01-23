@@ -7,6 +7,5 @@ export function Header() {
             <img src={ignitelogo} alt="logo" className="h-8 "/>
             <strong className="text-1xl">Ignite Post</strong>
         </header>
-        
     )
 }
