@@ -1,4 +1,4 @@
-import { Comment } from "./components/comment";
+
 import { Header } from "./components/Header";
 import { Post } from "./components/Post";
 import { Sidebar } from "./components/Sidebar";
@@ -11,7 +11,7 @@ export function App() {
         <Sidebar />
         <main>
           <Post/>
-          <Comment />
+         
         </main>
       </div>
     </div>
