@@ -31,8 +31,8 @@ export function Comment() {
         </div>
 
         <footer className="group mt-4 flex items-start border-0">
-          <button className="flex justify-center items-center gap-4 border-0 cursor-pointer  hover:text-green-400">
-            <ThumbsUp size={16}  className="mb-0.5"/>
+          <button className="flex justify-center items-center gap-4 border-0 cursor-pointer ">
+            <ThumbsUp size={16}  className="mb-0.5 hover:text-green-400"/>
             Aplaudir{" "}
             <span
               className="before:content-['\2022']"
