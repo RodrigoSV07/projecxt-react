@@ -1,46 +1,63 @@
+import { format, formatDistanceToNow } from 'date-fns'; 
+import { Avatar } from "./Avatar";
 import { Comment } from "./comment";
+import { ptBR } from 'date-fns/locale';
 
-export function Post() {
+export interface Author {
+  avatarUrl: string;
+  name: string;
+  role: string;
+}
+
+export interface PostContent {
+  type: "paragraph" | "link";
+  content: string;
+}
+
+
+export interface PostData {
+  id: number;
+  author: Author;
+  content: PostContent[];
+  publishedAt: Date;
+}
+
+
+export function Post({ author, content, publishedAt}: PostData){
+  const  publishedDateFormated = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+    locale: ptBR,
+  })
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true,
+  })
   return (
     <article className="bg-gray-800 rounded-lg p-10">
       <header className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <img
-            src="https://avatars.githubusercontent.com/u/108432234?v=4"
-            alt=""
-            className="w-12 h-12 border border-green-400 rounded-md"
-          />
+          <Avatar src="https://avatars.githubusercontent.com/u/108432234?v=4"/>
           <div className="flex flex-col">
-            <strong className="text-gray-100">Rodrigo Sales</strong>
-            <span className="text-sm text-gray-400">Web Developer</span>
+            <strong className="text-gray-100">{author.name}</strong>
+            <span className="text-sm text-gray-400">{author.role}</span>
           </div>
         </div>
 
-        <time dateTime="" className="text-sm text-gra">
-          Publicado há 1h
+        <time title= {publishedDateFormated} dateTime="" className="text-sm text-gra">
+          {publishedDateRelativeToNow}
         </time>
       </header>
 
       <div className="text-gray-300 leading-8 mt-4">
-        <p>Fala galeraa 👋</p>
-        <p>
-          Acabei de subir mais um projeto no meu portifa. É um projeto que fiz
-          no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
-        </p>
-        <p>
-          {" "}
-          <a href="" className="text-green-500 decoration-0">
-            {" "}
-            👉 jane.design/doctorcare
-          </a>
-        </p>
-        <p>
-          {" "}
-          <a href="" className="text-green-500 decoration-0">
-            {" "}
-            #novoprojeto #nlw #rocketseat
-          </a>
-        </p>
+       {content.map(line => {
+        if (line.type === 'paragraph') {
+          return <p>{line.content}</p>;
+        }else if(line.type === 'link') {
+          return <p><a href="#" className='text-green-500'>{line.content}</a></p>;
+        }
+       }
+
+       )}
       </div>
 
       <form className="group w-full flex flex-col mt-5 pt-4 border-t border-gray-700">

@@ -1,13 +1,10 @@
 import { ThumbsUp, Trash } from "lucide-react";
+import { Avatar } from "./Avatar";
 
 export function Comment() {
   return (
     <div className="mt-8 flex gap-4">
-      <img
-        src="https://avatars.githubusercontent.com/u/108432234?v=4"
-        alt=""
-        className="w-12 h-12 rounded-md"
-      />
+      <Avatar src="https://avatars.githubusercontent.com/u/108432234?v=4"/>
 
       <div className="flex-1">
         <div className="bg-gray-700 rounded-md p-4">
