@@ -1,7 +1,18 @@
 import { ThumbsUp, Trash } from "lucide-react";
 import { Avatar } from "./Avatar";
 
-export function Comment() {
+interface PostContent {
+  content: string;
+  onDeleteComment: (comment: string) => void;
+}
+
+export function Comment({content, onDeleteComment}: PostContent) {
+
+  function handleDeleteComment(){
+    onDeleteComment(content);
+  }
+
+
   return (
     <div className="mt-8 flex gap-4">
       <Avatar src="https://avatars.githubusercontent.com/u/108432234?v=4"/>
@@ -17,6 +28,7 @@ export function Comment() {
             </div>
 
             <button
+              onClick={handleDeleteComment}
               title="Deletar comment"
               className="bg-transparent leading-0 hover:text-red-600"
             >
@@ -24,11 +36,11 @@ export function Comment() {
             </button>
           </header>
 
-          <p className="mt-4 text-gray-300">Muito bom Devon, parabéns!! 👏👏</p>
+          <p className="mt-4 text-gray-300">{content}</p>
         </div>
 
         <footer className="group mt-4 flex items-start border-0">
-          <button className="flex justify-center items-center gap-4 border-0 cursor-pointer ">
+          <button  className="flex justify-center items-center gap-4 border-0 cursor-pointer ">
             <ThumbsUp size={16}  className="mb-0.5 hover:text-green-400"/>
             Aplaudir{" "}
             <span
