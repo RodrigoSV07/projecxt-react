@@ -51,8 +51,13 @@ export function Post({ author, content, publishedAt }: PostData) {
   }
 
   function deleteComment(commentToDelete: string) {
-    
+    const commentWithoutDeletedOne = comments.filter(
+      comment => comment !== commentToDelete
+    );
+  
+    setComments(commentWithoutDeletedOne);
   }
+  
 
   return (
     <article className="bg-gray-800 rounded-lg p-10">
