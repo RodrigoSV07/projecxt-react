@@ -1,6 +1,6 @@
 import { format, formatDistanceToNow } from "date-fns";
 import { Avatar } from "./Avatar";
-import { Comment } from "./comment";
+import { Comment } from "./Comment";
 import { ptBR } from "date-fns/locale";
 import { useState } from "react";
 
@@ -45,9 +45,14 @@ export function Post({ author, content, publishedAt }: PostData) {
   }
 
   function handleNewCommentChange(
-    event: React.ChangeEvent<HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLTextAreaElement>, 
   ) {
+    event?.target.setCustomValidity('')
     setNewCommentText(event.target.value);
+  }
+
+  function HandleNewCommentInvalid(event: React.InvalidEvent<HTMLTextAreaElement>) {
+    event?.target.setCustomValidity('Esse campo é obriga')
   }
 
   function deleteComment(commentToDelete: string) {
@@ -104,6 +109,8 @@ export function Post({ author, content, publishedAt }: PostData) {
           className="py-3 px-3 bg-gray-900 rounded-md border-0 mt-4 resize-none h-24 text-gray-100 outline-none"
           onChange={handleNewCommentChange}
           value={newCommentText}
+          onInvalid={HandleNewCommentInvalid}
+          required
         />
 
         <footer
