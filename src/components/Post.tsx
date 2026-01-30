@@ -45,24 +45,25 @@ export function Post({ author, content, publishedAt }: PostData) {
   }
 
   function handleNewCommentChange(
-    event: React.ChangeEvent<HTMLTextAreaElement>, 
+    event: React.ChangeEvent<HTMLTextAreaElement>
   ) {
-    event?.target.setCustomValidity('')
+    event?.target.setCustomValidity("");
     setNewCommentText(event.target.value);
   }
 
-  function HandleNewCommentInvalid(event: React.InvalidEvent<HTMLTextAreaElement>) {
-    event?.target.setCustomValidity('Esse campo é obriga')
+  function HandleNewCommentInvalid(
+    event: React.InvalidEvent<HTMLTextAreaElement>
+  ) {
+    event?.target.setCustomValidity("Esse campo é obrigatório");
   }
 
   function deleteComment(commentToDelete: string) {
     const commentWithoutDeletedOne = comments.filter(
-      comment => comment !== commentToDelete
+      (comment) => comment !== commentToDelete
     );
-  
+
     setComments(commentWithoutDeletedOne);
   }
-  
 
   return (
     <article className="bg-gray-800 rounded-lg p-10">
@@ -75,7 +76,11 @@ export function Post({ author, content, publishedAt }: PostData) {
           </div>
         </div>
 
-        <time title={publishedDateFormated} dateTime="" className="text-sm text-gra">
+        <time
+          title={publishedDateFormated}
+          dateTime=""
+          className="text-sm text-gra"
+        >
           {publishedDateRelativeToNow}
         </time>
       </header>
@@ -121,7 +126,13 @@ export function Post({ author, content, publishedAt }: PostData) {
         >
           <button
             type="submit"
-            className="py-4 px-6 bg-green-500 mt-4 rounded-md font-bold text-gray-100 cursor-pointer transition hover:bg-green-400"
+            className="mt-4 px-6 py-4 rounded-md font-bold text-gray-100
+             bg-green-500
+            transition
+           hover:bg-green-400
+            disabled:opacity-70
+            disabled:cursor-not-allowed"
+            disabled={newCommentText.length === 0}
           >
             Publicar
           </button>

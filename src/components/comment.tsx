@@ -1,5 +1,6 @@
 import { ThumbsUp, Trash } from "lucide-react";
 import { Avatar } from "./Avatar";
+import { useState } from "react";
 
 interface PostContent {
   content: string;
@@ -8,8 +9,14 @@ interface PostContent {
 
 export function Comment({content, onDeleteComment}: PostContent) {
 
+  const [likeCount, setLikeCount] = useState(0);
+
   function handleDeleteComment(){
     onDeleteComment(content);
+  }
+
+  function handleLikeComment() {
+    setLikeCount(prev => prev + 1)
   }
 
 
@@ -40,13 +47,13 @@ export function Comment({content, onDeleteComment}: PostContent) {
         </div>
 
         <footer className="group mt-4 flex items-start border-0">
-          <button  className="flex justify-center items-center gap-4 border-0 cursor-pointer ">
+          <button onClick={handleLikeComment} className="flex justify-center items-center gap-4 border-0 cursor-pointer ">
             <ThumbsUp size={16}  className="mb-0.5 hover:text-green-400"/>
             Aplaudir{" "}
             <span
               className="before:content-['\2022']"
             >
-              20
+              {likeCount}
             </span>
           </button>
         </footer>
